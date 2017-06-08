@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
-
 public class MainActivity extends AppCompatActivity {
 
-    private int numberOfCoffees = 0;
-    private int priceOfCoffee = 5;
+    int numberOfCoffees;
+    int priceOfCoffee = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +17,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitOrder(View view) {
-        display(numberOfCoffees);
-        displayPrice(numberOfCoffees * priceOfCoffee);
+        String priceMessage = "Total: $" + (numberOfCoffees * priceOfCoffee);
+        priceMessage = priceMessage + "\nThank you!";
+        displayMessage(priceMessage);
     }
 
     private void display(int number) {
@@ -28,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
         quantityTextView.setText("" + number);
     }
 
-    private void displayPrice(int number) {
+    private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
+        priceTextView.setText(message);
     }
 
     public void increment(View view) {
