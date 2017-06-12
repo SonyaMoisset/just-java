@@ -17,12 +17,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitOrder(View view) {
-        String priceMessage = "Total: $" + (numberOfCoffees * priceOfCoffee);
-        priceMessage = priceMessage + "\nThank you!";
-        displayMessage(priceMessage);
+        int price = calculatePrice();
+        displayMessage(createOrderSummay(price));
     }
 
-    private void display(int number) {
+    private int calculatePrice() {
+        return numberOfCoffees * priceOfCoffee;
+    }
+
+    private String createOrderSummay(int price) {
+        String priceMessage = "Name: Sonya Moisset";
+        priceMessage += "\nQuantity: " + numberOfCoffees;
+        priceMessage += "\nTotal: $" + price;
+        priceMessage += "\nThank you!";
+        return priceMessage;
+    }
+
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
@@ -34,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void increment(View view) {
         numberOfCoffees++;
-        display(numberOfCoffees);
+        displayQuantity(numberOfCoffees);
     }
 
     public void decrement(View view) {
         numberOfCoffees--;
-        display(numberOfCoffees);
+        displayQuantity(numberOfCoffees);
     }
 }
